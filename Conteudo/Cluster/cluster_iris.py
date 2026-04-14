@@ -45,7 +45,7 @@ dados_num_norm = pd.DataFrame(dados_num_norm, columns = dados_num.columns)
 
 # -- Juntar o dados_num_norms com o dado_cat_norm
 dados_norm = dados_num_norm.join(dados_cat_norm)
-#print(dados_norm)
+#print(dados_norm.columns)
 
 # 3. HIPERPARAMETIZAR
 # Vamos determinar o número ótimo de clusters antes do treinamento
@@ -53,5 +53,48 @@ distortions=[] # Matriz para armazernar as distoções
 K = range(1, dados.shape[0])
 for i in K:
     cluster_model = KMeans(n_clusters=i, random_state=42).fit(dados_norm)
-    
 
+    # Calcular e armazenar a distorção de cada treinamento
+    distortions.append(
+        sum(
+        np.min(
+            cdist(dados_norm, 
+                  cluster_model.cluster_centers_,
+                  'euclidean'), axis=1)/dados_norm.shape[0]
+        )
+    )
+#print(distortions)
+
+# Criar o gráfico para ilustrar com a matriz distortions com K
+#fig, ax = plt.subplots()
+#ax.plot(K, distortions)
+#ax.set(xlabel='n Clusters', ylabel='Distorcoes')
+#ax.grid()
+#plt.show()
+
+# Determinar o número ótimo de cluster para o modelo
+x0 = K[0]
+y0 = distortions[0]
+xn = K[-1]
+yn = distortions[-1]
+distances = []
+for i in range(len(distortions)):
+    x = K[i]
+    y = distortions[i]
+    numerador = abs(
+        (yn-y0)*x - (xn-x0)*y + xn*y0 - yn*x0
+    )
+    # --- O resultado de $\sqrt{x^2}$ é sempre o valor absoluto de $x$.
+    denominador = math.sqrt(
+        (yn-y0)**2 + (xn-x0)**2
+    )
+    distances.append(numerador/denominador)
+numero_clusters_otimo = (K[distances.index(np.max(distances))])
+
+# Treinar o modelo com o número ótimo
+cluster_model = KMeans(
+                        n_clusters=numero_clusters_otimo,
+                        random_state=42).fit(dados_norm)
+
+# Salvar o modelo para uso posterior
+pickle.dump(cluster_model, open('cluster_iris.pkl', 'wb'))
