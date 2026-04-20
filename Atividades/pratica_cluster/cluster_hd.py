@@ -1,4 +1,4 @@
-# Imports
+# IMPORTS
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import pickle
@@ -9,51 +9,43 @@ from scipy.spatial.distance import cdist
 import numpy as np
 
 # 1. Abrir os dados
-dados = pd.read_csv('HousingData.csv', sep=',')
+dados = pd. read_csv('HousingData.csv', sep=',')
 #print(dados.head(10))
 
-dados = dados.fillna(dados.mean())
-
 # 2. Normalizar os dados
-# --- Separação dos atributos numéricos e categóricos 
 dados_num = dados.drop(columns=['CHAS'])
 dados_cat = dados['CHAS']
 
-# --- Normalizar Dados Numéricos ---
-# Instanciar normalizador
-scaler = MinMaxScaler()
+dados_num = dados_num.fillna(dados_num.mean()) # --- Tratamento de NaN: média
+dados_cat = dados_cat.fillna(dados_cat.mode()[0]) # --- Tratamento de NaN: preenche com 0
 
-# Treinar normalizador
-normalizador = scaler.fit(dados_num)
+# 2.1 Normalizar Dados Numéricos
+scaler = MinMaxScaler() # --- Instanciar normalizador
+normalizador = scaler.fit(dados_num) # --- Treinar normalizador
 
-# Salvar o normalizador para uso posterior
-pickle.dump(normalizador, open('normalizador_hd.pkl', 'wb'))
+pickle.dump(normalizador, open('normalizador_hd.pkl', 'wb')) # --- Salvar o normalizador para uso posterior
 
-# Normalizar os dados
-dados_num_norm = normalizador.transform(dados_num)
+dados_num_norm = normalizador.transform(dados_num) # --- Normalizar dados
 #print(dados_num_norm)
 
-# --- Normalizar Dados Categóricos ---
+# 2.2 Normalizar Dados Categóricos
 dados_cat_norm = pd.get_dummies(dados_cat, prefix='CHAS', prefix_sep='_', dtype=int)
 #print(dados_cat_norm)
 
 # 3. Reagrupar os objetos normalizador em uma dataframe
-# --- Converter a matriz numérica em um dataframe
-dados_num_norm = pd.DataFrame(dados_num_norm, columns=dados_num.columns)
+dados_num_norm = pd.DataFrame(dados_num_norm, columns=dados_num.columns) # --- Converte a matriz numérica em dataframe
 
-# --- Juntar os dados_num_norms com o dado_cat_norm
-dados_norm = dados_num_norm.join(dados_cat_norm)
+dados_norm = dados_num_norm.join(dados_cat_norm) # --- Juntar os dados numéricos normalizados com os dados categóricos normalizados
 #print(dados_norm.columns)
 
-# 4. Hiperparametizar 
-# --- Determinar o número ótimo de clusters antes do treinamento
-distortions=[]
+# 4. Hiperparametizar
+distortions = []
 K = range(1, dados.shape[0])
 
 for i in K:
     cluster_model = KMeans(n_clusters=i, random_state=42).fit(dados_norm)
 
-    # calcular e armazenar a distorção de cada treinamento
+    # --- Calcular e armazenar a distorção de cada treinamento
     distortions.append(
         sum(
             np.min(
@@ -81,10 +73,10 @@ for i in range(len(distortions)):
         (yn-y0)**2 + (xn-x0)**2
     )
     distances.append(numerador/denominador)
-numero_clusters_otimo = (K[distances.index(np.max(distances))])
+numero_cluster_otimo = (K[distances.index(np.max(distances))])
 
-# --- Treinar o modelo com o número ótimo
-cluster_model = KMeans(n_clusters=numero_clusters_otimo, random_state=42).fit(dados_norm)
+# 6. Treinar o modelo com o número ótimo
+cluster_model = KMeans(n_clusters=numero_cluster_otimo, random_state=42).fit(dados_norm)
 
-# --- Salvar o modelo para uso posterior
 pickle.dump(cluster_model, open('cluster_hd.pkl', 'wb'))
+#print(cluster_model)
