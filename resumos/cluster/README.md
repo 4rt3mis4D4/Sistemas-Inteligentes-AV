@@ -126,8 +126,4 @@ Este projeto demonstra um fluxo completo de Machine Learning, incluindo:
 * Inferência
 * Interpretação de resultados
 
-Ideal para estudos em **Sistemas Inteligentes** e **Ciência de Dados**.
-
 ---
-
-Se ainda ficar estranho no GitHub, me fala que eu ajusto exatamente pro teu tema (dark/light) ou deixo mais “visual profissional estilo portfólio”.
