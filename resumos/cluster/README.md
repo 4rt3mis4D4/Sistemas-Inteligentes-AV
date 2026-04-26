@@ -18,7 +18,7 @@ Organizar os dados de forma que elementos dentro do mesmo grupo sejam mais semel
 
 ### 🔹 Aplicação neste projeto
 
-Identificar padrões entre diferentes tipos de flores com base em suas características físicas (comprimento e largura de sépalas e pétalas).
+Identificar padrões entre diferentes tipos de flores com base em suas características físicas (comprimento e largura de pétala e cálice).
 
 ---
 
