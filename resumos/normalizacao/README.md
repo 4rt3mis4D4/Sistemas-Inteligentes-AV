@@ -122,5 +122,3 @@ Boas práticas destacadas:
 - Escolha correta da técnica conforme o tipo de variável  
 - Separação clara por tipo de dado  
 - Possibilidade de reverter transformações (interpretabilidade)  
-
-Esses conceitos são base para modelos mais robustos e confiáveis em **Ciência de Dados** e **Sistemas Inteligentes**.
