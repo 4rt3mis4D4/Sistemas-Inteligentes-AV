@@ -69,4 +69,4 @@ dados_ord_traduzidos = dataframe[['CAEC', 'CALC', 'NObeyesdad']].round(0).astype
 
 # -- Junta as colunas desnormalizadas categóricas com as numéricas
 clusters = pd.concat([atributos_num_desnorm, dados_nom_desnorm, dados_ord_traduzidos], axis=1)
-#print(clusters)
+print(clusters) # -- Exibe as caracteristicas médias de cada cluster criado
