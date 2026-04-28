@@ -60,7 +60,7 @@ pip install -r requirements.txt
 Dataset do projeto:
 
 * Base usada no treinamento
-* Contém dados dos clientes (numéricos/categóricos)
+* Contém dados (numéricos/categóricos)
 * Utilizado para gerar os clusters
 
 ---
