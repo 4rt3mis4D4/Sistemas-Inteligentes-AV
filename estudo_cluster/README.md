@@ -1,4 +1,4 @@
-# 🎯 Clusterização de Clientes
+# 🎯 Clusterização de DataSets .CSV
 
 Diretório para prática de **Clustering** com datasets do Kaggle.
 
