@@ -1,6 +1,6 @@
 #Classificador - versão 2
 #Arquivo de dados: fertility_diagnosys.txt
-#Versão sem balanceamento de classes
+#Versão com balanceamento de classes
 
 from sklearn.model_selection import train_test_split
 import pandas as pd
