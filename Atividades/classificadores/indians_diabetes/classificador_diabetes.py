@@ -111,4 +111,6 @@ df_resultados = pd.DataFrame(resultados).sort_values(by='Acurácia', ascending=F
 print("\n--- TABELA ACURÁCIA DOS 3 MODELOS ---\n")
 print(df_resultados.to_string(index=False))
 
-# Após analisar a tabela compartiva dos 3 modelos, cheguei a conclusão que o modelo "Random Forest" é o melhor, pois ele obteve os melhores resultados em todas as métricas: maior Acurácia (0,7597), Recall (0,7407) e F1-Score (0,6838), sendo a escolha mais segura para identificar pacientes diabéticos e minimizar falsos negativos.
+# Após analisar a tabela compartiva dos 3 modelos, cheguei a conclusão que o modelo "Random Forest" é o melhor, 
+# pois ele obteve os melhores resultados em todas as métricas: maior Acurácia (0,7597), Recall (0,7407) e F1-Score (0,6838), 
+# sendo a escolha mais segura para identificar pacientes diabéticos e minimizar falsos negativos.
