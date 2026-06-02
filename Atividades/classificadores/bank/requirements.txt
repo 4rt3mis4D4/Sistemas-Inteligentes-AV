@@ -1,0 +1,5 @@
+pandas
+matplotlib
+ucimlrepo
+imbalanced-learn
+scikit-learn
