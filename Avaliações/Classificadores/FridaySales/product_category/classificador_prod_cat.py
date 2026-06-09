@@ -129,8 +129,9 @@ print("\n Matriz de Confusão:")
 print(cm)
 
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=classes)
-disp.plot(cmap='Blues', values_format='d') 
+disp.plot(cmap='Blues', values_format='d', xticks_rotation=45) 
 plt.title("Matriz de Confusão - Random Forest")
+plt.tight_layout() 
 plt.show()
 # 12. CÁLCULO SENSIBILIDADE E ESPECIFICIDADE
 n_classes = len(classes)
