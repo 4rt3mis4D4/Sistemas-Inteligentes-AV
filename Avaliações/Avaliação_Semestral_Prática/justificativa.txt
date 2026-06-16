@@ -1,0 +1,2 @@
+A Classificação foi utilizada pois o dataset já possui uma coluna "mushroom_type" com rótulos pré-definidos que indicam 
+se um cogumelo é venenoso (poisonous) ou comestível (edible), caracterizando um problema de aprendizado supervisionado.
